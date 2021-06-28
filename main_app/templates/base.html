@@ -33,9 +33,15 @@
 {#    <div >#}
 {#      <div class="row justify-content-center">#}
         <div>
+        {% if user.is_authenticated %}
 
-          <h1 class="mt-2"><img alt="" src="{% static 'images/logo.png' %}"></h1>
-          <hr class="mt-0 mb-4 ">
+          <h1 class="mt-2"><a href="{% url 'main_app:home' %}"><img alt="" src="{% static 'images/logo.png' %}"></a></h1>
+        {% else %}
+            <h1 class="mt-2"><a href="{% url 'main_app:landing' %}"><img alt="" src="{% static 'images/logo.png' %}"></a></h1>
+
+
+        {% endif %}
+        <hr class="mt-0 mb-4 ">
 
         <div class="page-wrapper  p-t-180 p-b-100 font-lato">
         <div class="wrapper wrapper--w780">
