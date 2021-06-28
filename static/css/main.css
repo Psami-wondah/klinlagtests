@@ -509,7 +509,7 @@ input {
 }
 
 .card-3 .card-heading {
-  background: url("../images/logo.png") top left/cover no-repeat;
+  background: url("../images/img.png") no-repeat top left/cover;
   display: table-cell;
   width: 50%;
 }
