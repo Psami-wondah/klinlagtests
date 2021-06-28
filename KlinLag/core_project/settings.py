@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 import os
-import environ
+import environ, django_heroku
  
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
@@ -11,9 +11,9 @@ environ.Env.read_env()
 
 SECRET_KEY = os.getenv("API_KEY")
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['klinlag.herokuapp.com', '127.0.0.1']
 
 
 INSTALLED_APPS = [
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',# CORS defines a way in which our Web App's FE and BE will interact
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,6 +115,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -150,7 +155,7 @@ DJOSER = {
 }
 
 
-STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -160,3 +165,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pjt87klinlag@gmail.com'
 EMAIL_HOST_PASSWORD = os.getenv('PASS')
+
+django_heroku.settings(locals())
+LOGIN_URL = 'main_app:login'
