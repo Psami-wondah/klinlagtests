@@ -11,7 +11,7 @@ environ.Env.read_env()
 
 SECRET_KEY = os.getenv("API_KEY")
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['klinlag.herokuapp.com', '127.0.0.1']
 
